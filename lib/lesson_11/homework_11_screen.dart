@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:rd_first_project/lesson_11/hw_11_task_1_screen.dart';
+import 'package:rd_first_project/lesson_11/hw_11_task_2_screen.dart';
 import 'package:rd_first_project/widgets/nav_button.dart';
 import 'package:rd_first_project/widgets/section_header.dart';
 
 const _tasks = [
   {'number': 1, 'title': 'Базовий контейнер'},
+  {'number': 2, 'title': 'Текст та іконки'},
 ];
 
 class Homework11Screen extends StatelessWidget {
@@ -32,6 +34,7 @@ class Homework11Screen extends StatelessWidget {
                 onPressed: () {
                   final screen = switch (task['number']) {
                     1 => Hw11Task1Screen(),
+                    2 => Hw11Task2Screen(),
                     _ => throw UnimplementedError(),
                   };
                   Navigator.push(
