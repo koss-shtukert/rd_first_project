@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rd_first_project/widgets/blue_container.dart';
 
 class Hw11Task1Screen extends StatelessWidget {
   const Hw11Task1Screen({super.key});
@@ -11,14 +12,7 @@ class Hw11Task1Screen extends StatelessWidget {
         title: Text('Завдання 1 — Базовий контейнер'),
       ),
       body: Center(
-        child: Container(
-          width: 300,
-          height: 150,
-          decoration: BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadius.circular(16),
-          ),
-        ),
+        child: BlueContainer(),
       ),
     );
   }
