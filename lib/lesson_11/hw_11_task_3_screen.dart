@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rd_first_project/widgets/blue_container.dart';
-import 'package:rd_first_project/widgets/star_greeting.dart';
+import 'package:rd_first_project/lesson_11/widget/colored_container.dart';
+import 'package:rd_first_project/lesson_11/widget/star_greeting.dart';
 
 const _colors = [Colors.blue, Colors.green, Colors.red];
 
@@ -20,7 +20,7 @@ class Hw11Task3Screen extends StatelessWidget {
           children: [
             for (final (i, color) in _colors.indexed) ...[
               if (i > 0) const SizedBox(height: 8),
-              BlueContainer(color: color, child: StarGreeting()),
+              ColoredContainer(color: color, child: StarGreeting()),
             ],
           ],
         ),

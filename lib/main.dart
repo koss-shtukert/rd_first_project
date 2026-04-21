@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rd_first_project/lesson_11/homework_11_screen.dart';
-import 'package:rd_first_project/widgets/nav_button.dart';
-import 'package:rd_first_project/widgets/section_header.dart';
+import 'package:rd_first_project/main/widget/nav_button.dart';
+import 'package:rd_first_project/main/widget/section_header.dart';
 
 const _homeworks = [
   {'number': 11, 'title': 'Віджети частина 1'},

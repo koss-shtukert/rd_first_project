@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
 class StarGreeting extends StatelessWidget {
-  const StarGreeting({super.key});
+  const StarGreeting({super.key, this.isActive = true});
+
+  final bool isActive;
 
   @override
   Widget build(BuildContext context) {
+    final icon = isActive ? Icons.star : Icons.star_border;
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(Icons.star, color: Colors.yellow),
+        Icon(icon, color: Colors.yellow),
         const SizedBox(width: 10),
         Text(
           'Привіт, Flutter!',
@@ -19,7 +22,7 @@ class StarGreeting extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 10),
-        Icon(Icons.star, color: Colors.yellow),
+        Icon(icon, color: Colors.yellow),
       ],
     );
   }

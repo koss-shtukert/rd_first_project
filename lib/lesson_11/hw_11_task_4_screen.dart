@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:rd_first_project/widgets/blue_container.dart';
-import 'package:rd_first_project/widgets/star_greeting.dart';
+import 'package:rd_first_project/lesson_11/widget/colored_container.dart';
+import 'package:rd_first_project/lesson_11/widget/column_container.dart';
+import 'package:rd_first_project/lesson_11/widget/star_greeting.dart';
+
+const _containers = [
+  {'color': Colors.blue, 'alignment': Alignment.topLeft},
+  {'color': Colors.green, 'alignment': Alignment.center},
+  {'color': Colors.red, 'alignment': Alignment.bottomRight},
+];
 
 class Hw11Task4Screen extends StatelessWidget {
   const Hw11Task4Screen({super.key});
@@ -12,36 +19,14 @@ class Hw11Task4Screen extends StatelessWidget {
         backgroundColor: Colors.blueGrey,
         title: Text('Завдання 4 — Різні варіанти вирівнювання'),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 8),
-              child: BlueContainer(
-                color: Colors.blue,
-                height: null,
-                alignment: Alignment.topLeft,
-                child: StarGreeting(),
-              ),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Center(
-            child: BlueContainer(
-              color: Colors.green,
-              alignment: Alignment.center,
-              child: StarGreeting(),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Center(
-            child: BlueContainer(
-              color: Colors.red,
-              alignment: Alignment.bottomRight,
-              child: StarGreeting(),
-            ),
-          ),
-        ],
+      body: ColumnContainer(
+        containers: _containers,
+        itemBuilder: (index, item) => ColoredContainer(
+          color: item['color'] as Color,
+          height: index == 0 ? null : 150,
+          alignment: item['alignment'] as Alignment,
+          child: StarGreeting(),
+        ),
       ),
     );
   }

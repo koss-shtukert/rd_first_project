@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class BlueContainer extends StatelessWidget {
-  const BlueContainer({
+class ColoredContainer extends StatelessWidget {
+  const ColoredContainer({
     super.key,
     this.alignment = Alignment.bottomRight,
     this.color = Colors.blue,

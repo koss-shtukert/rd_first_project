@@ -3,14 +3,16 @@ import 'package:rd_first_project/lesson_11/hw_11_task_1_screen.dart';
 import 'package:rd_first_project/lesson_11/hw_11_task_2_screen.dart';
 import 'package:rd_first_project/lesson_11/hw_11_task_3_screen.dart';
 import 'package:rd_first_project/lesson_11/hw_11_task_4_screen.dart';
-import 'package:rd_first_project/widgets/nav_button.dart';
-import 'package:rd_first_project/widgets/section_header.dart';
+import 'package:rd_first_project/lesson_11/hw_11_task_5_screen.dart';
+import 'package:rd_first_project/main/widget/nav_button.dart';
+import 'package:rd_first_project/main/widget/section_header.dart';
 
 const _tasks = [
   {'number': 1, 'title': 'Базовий контейнер'},
   {'number': 2, 'title': 'Текст та іконки'},
   {'number': 3, 'title': 'Робота з Column'},
   {'number': 4, 'title': 'Різні варіанти вирівнювання'},
+  {'number': 5, 'title': 'Interactive Card Challenge'},
 ];
 
 class Homework11Screen extends StatelessWidget {
@@ -41,6 +43,7 @@ class Homework11Screen extends StatelessWidget {
                     2 => Hw11Task2Screen(),
                     3 => Hw11Task3Screen(),
                     4 => Hw11Task4Screen(),
+                    5 => Hw11Task5Screen(),
                     _ => throw UnimplementedError(),
                   };
                   Navigator.push(

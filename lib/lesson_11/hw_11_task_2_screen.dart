@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rd_first_project/widgets/blue_container.dart';
-import 'package:rd_first_project/widgets/star_greeting.dart';
+import 'package:rd_first_project/lesson_11/widget/colored_container.dart';
+import 'package:rd_first_project/lesson_11/widget/star_greeting.dart';
 
 class Hw11Task2Screen extends StatelessWidget {
   const Hw11Task2Screen({super.key});
@@ -12,7 +12,7 @@ class Hw11Task2Screen extends StatelessWidget {
         backgroundColor: Colors.blueGrey,
         title: Text('Завдання 2 — Текст та іконки'),
       ),
-      body: Center(child: BlueContainer(child: StarGreeting())),
+      body: Center(child: ColoredContainer(child: StarGreeting())),
     );
   }
 }
