@@ -1,4 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:rd_first_project/widgets/nav_button.dart';
+import 'package:rd_first_project/widgets/section_header.dart';
+
+const _homeworks = [
+  {'number': 11, 'title': 'Віджети частина 1'},
+  {'number': 12, 'title': 'Віджети частина 2'},
+  {'number': 13, 'title': 'Взаємодія віджетів та компонування'},
+  {'number': 16, 'title': 'Найпопулярніші пакети для навігації'},
+  {'number': 18, 'title': 'BloC. Ідея та основні концепти'},
+  {'number': 19, 'title': 'BloC. Поєднання віджетів та бізнес-логіки'},
+  {'number': 25, 'title': 'REST API'},
+];
 
 void main() {
   runApp(const MyApp());
@@ -10,76 +22,66 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const MyHomePage(title: 'Demo Home Page'),
+      title: 'RD Flutter Проєкт',
+      theme: ThemeData.dark(useMaterial3: true),
+      home: const HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  void _decrementCounter() {
-    setState(() {
-      _counter--;
-    });
-  }
-
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-
-        title: Text(widget.title),
-      ),
-      body: Center(
+      appBar: AppBar(backgroundColor: Colors.blueGrey, title: Text('Головна')),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            SectionHeader(title: 'Привіт', subtitle: 'Обери заняття'),
+            ...List.generate(_homeworks.length, (index) {
+              final hw = _homeworks[index];
+              return NavButton(
+                label: '${hw['number']}. ${hw['title']}',
+                onPressed: () =>
+                    _navigateToHomework(context, hw['number']! as int),
+              );
+            }),
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          FloatingActionButton(
-            onPressed: _decrementCounter,
-            tooltip: 'Decrement',
-            child: const Icon(Icons.remove),
+    );
+  }
+
+  void _navigateToHomework(BuildContext context, int number) {
+    final screen = switch (number) {
+      _ => Scaffold(
+        appBar: AppBar(
+          title: Text('Заняття $number'),
+          backgroundColor: Colors.blueGrey,
+        ),
+        body: Center(
+          child: Text(
+            'Незабаром',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 26,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          SizedBox(width: 10),
-          FloatingActionButton(
-            onPressed: _incrementCounter,
-            tooltip: 'Increment',
-            child: const Icon(Icons.add),
-          ),
-        ],
+        ),
       ),
+    };
+    Navigator.push(
+      context,
+      MaterialPageRoute<void>(builder: (context) => screen),
     );
   }
 }
