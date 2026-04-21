@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rd_first_project/lesson_11/homework_11_screen.dart';
 import 'package:rd_first_project/widgets/nav_button.dart';
 import 'package:rd_first_project/widgets/section_header.dart';
 
@@ -62,6 +63,7 @@ class _HomePageState extends State<HomePage> {
 
   void _navigateToHomework(BuildContext context, int number) {
     final screen = switch (number) {
+      11 => Homework11Screen(),
       _ => Scaffold(
         appBar: AppBar(
           title: Text('Заняття $number'),
