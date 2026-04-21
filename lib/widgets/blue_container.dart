@@ -5,18 +5,20 @@ class BlueContainer extends StatelessWidget {
     super.key,
     this.alignment = Alignment.bottomRight,
     this.color = Colors.blue,
+    this.height = 150,
     this.child,
   });
 
   final Alignment alignment;
   final Color color;
+  final double? height;
   final Widget? child;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 300,
-      height: 150,
+      height: height,
       padding: const EdgeInsets.all(10),
       alignment: alignment,
       decoration: BoxDecoration(

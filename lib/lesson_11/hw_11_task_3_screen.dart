@@ -1,10 +1,3 @@
-// 1. Помістіть контейнер у Column.
-// 2. Скопіюйте його ще **2 рази** (всього має бути 3).
-// 3. Додайте вертикальний відступ **8 px** між контейнерами.
-// 4. Змініть кольори:
-// - перший — синій
-// - другий — зелений
-// - третій — червоний
 import 'package:flutter/material.dart';
 import 'package:rd_first_project/widgets/blue_container.dart';
 import 'package:rd_first_project/widgets/star_greeting.dart';
