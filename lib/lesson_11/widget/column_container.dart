@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rd_first_project/lesson_11/entity/container_entity.dart';
 
 class ColumnContainer extends StatelessWidget {
   const ColumnContainer({
@@ -7,8 +8,8 @@ class ColumnContainer extends StatelessWidget {
     super.key,
   });
 
-  final List<Map<String, dynamic>> containers;
-  final Widget Function(int index, Map<String, dynamic> item) itemBuilder;
+  final List<ContainerEntity> containers;
+  final Widget Function(int index, ContainerEntity item) itemBuilder;
 
   @override
   Widget build(BuildContext context) {

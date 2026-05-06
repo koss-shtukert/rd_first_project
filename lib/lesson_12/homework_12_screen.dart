@@ -1,37 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:rd_first_project/lesson_11/hw_11_task_1_screen.dart';
-import 'package:rd_first_project/lesson_11/hw_11_task_2_screen.dart';
-import 'package:rd_first_project/lesson_11/hw_11_task_3_screen.dart';
-import 'package:rd_first_project/lesson_11/hw_11_task_4_screen.dart';
-import 'package:rd_first_project/lesson_11/hw_11_task_5_screen.dart';
+import 'package:rd_first_project/lesson_12/hw_12_task_1_screen.dart';
 import 'package:rd_first_project/main/entity/task_entity.dart';
 import 'package:rd_first_project/main/widget/nav_button.dart';
 import 'package:rd_first_project/main/widget/section_header.dart';
 
-final _tasks = [
-  TaskEntity(number: 1, title: 'Базовий контейнер'),
-  TaskEntity(number: 2, title: 'Текст та іконки'),
-  TaskEntity(number: 3, title: 'Робота з Column'),
-  TaskEntity(number: 4, title: 'Різні варіанти вирівнювання'),
-  TaskEntity(number: 5, title: 'Interactive Card Challenge'),
-];
+final _tasks = [TaskEntity(number: 1, title: 'Оцінка візиту до магазину')];
 
-class Homework11Screen extends StatelessWidget {
-  const Homework11Screen({super.key});
+class Homework12Screen extends StatelessWidget {
+  const Homework12Screen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueGrey,
-        title: Text('Заняття 11'),
+        title: Text('Заняття 12'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             SectionHeader(
-              title: 'Віджети частина 1',
+              title: 'Віджети частина 2',
               subtitle: 'Обери завдання',
             ),
             ...List.generate(_tasks.length, (index) {
@@ -40,11 +30,7 @@ class Homework11Screen extends StatelessWidget {
                 label: '${task.number}. ${task.title}',
                 onPressed: () {
                   final screen = switch (task.number) {
-                    1 => Hw11Task1Screen(),
-                    2 => Hw11Task2Screen(),
-                    3 => Hw11Task3Screen(),
-                    4 => Hw11Task4Screen(),
-                    5 => Hw11Task5Screen(),
+                    1 => Hw12Task1Screen(),
                     _ => throw UnimplementedError(),
                   };
                   Navigator.push(
