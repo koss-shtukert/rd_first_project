@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rd_first_project/lesson_12/constants/assets.dart';
 
 class LikeDislikeButtons extends StatelessWidget {
   const LikeDislikeButtons({
@@ -17,15 +18,15 @@ class LikeDislikeButtons extends StatelessWidget {
       children: [
         _RatingButton(
           isActive: value == false,
-          activeIcon: 'assets/icons/dislike_active.png',
-          defaultIcon: 'assets/icons/dislike.png',
+          activeIcon: Lesson12Assets.dislikeActive,
+          defaultIcon: Lesson12Assets.dislikeDefault,
           onTap: () => onChanged(value == false ? null : false),
         ),
         const SizedBox(width: 12),
         _RatingButton(
           isActive: value == true,
-          activeIcon: 'assets/icons/like_active.png',
-          defaultIcon: 'assets/icons/like.png',
+          activeIcon: Lesson12Assets.likeActive,
+          defaultIcon: Lesson12Assets.likeDefault,
           onTap: () => onChanged(value == true ? null : true),
         ),
       ],

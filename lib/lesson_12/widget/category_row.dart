@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:rd_first_project/lesson_12/widget/like_dislike_buttons.dart';
 
 class CategoryRow extends StatelessWidget {
-  final String name;
-  final bool? value;
-  final ValueChanged<bool?> onChanged;
-
   const CategoryRow({
-    super.key,
     required this.name,
     required this.value,
     required this.onChanged,
+    super.key,
   });
+  
+  final String name;
+  final bool? value;
+  final ValueChanged<bool?> onChanged;
 
   @override
   Widget build(BuildContext context) {

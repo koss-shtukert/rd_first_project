@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rd_first_project/lesson_12/constants/assets.dart';
 
 class StarRating extends StatelessWidget {
   const StarRating({required this.rating, required this.onChanged, super.key});
@@ -42,8 +43,8 @@ class StarRating extends StatelessWidget {
                   height: 48,
                   child: Image.asset(
                     index < rating
-                        ? 'assets/icons/rating.png'
-                        : 'assets/icons/rating_empty.png',
+                        ? Lesson12Assets.ratingFilled
+                        : Lesson12Assets.ratingEmpty,
                     width: 48,
                     height: 48,
                   ),
