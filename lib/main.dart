@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rd_first_project/lesson_11/homework_11_screen.dart';
 import 'package:rd_first_project/lesson_12/homework_12_screen.dart';
+import 'package:rd_first_project/lesson_13/homework_13_screen.dart';
 import 'package:rd_first_project/main/entity/homework_entity.dart';
 import 'package:rd_first_project/main/widget/nav_button.dart';
 import 'package:rd_first_project/main/widget/section_header.dart';
@@ -71,6 +72,7 @@ class _HomePageState extends State<HomePage> {
     final screen = switch (number) {
       11 => Homework11Screen(),
       12 => Homework12Screen(),
+      13 => Homework13Screen(),
       _ => Scaffold(
         appBar: AppBar(
           title: Text('Заняття $number'),
