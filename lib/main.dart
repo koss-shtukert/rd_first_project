@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:rd_first_project/lesson_11/homework_11_screen.dart';
-import 'package:rd_first_project/lesson_12/homework_12_screen.dart';
-import 'package:rd_first_project/lesson_13/homework_13_screen.dart';
+import 'package:go_router/go_router.dart';
 import 'package:rd_first_project/main/entity/homework_entity.dart';
 import 'package:rd_first_project/main/widget/nav_button.dart';
 import 'package:rd_first_project/main/widget/section_header.dart';
+import 'package:rd_first_project/router/app_router.dart';
+import 'package:rd_first_project/router/route_names.dart';
 
 const _homeworks = [
   HomeworkEntity(number: 11, title: 'Віджети частина 1'),
@@ -28,12 +28,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'RD Flutter Проєкт',
       theme: ThemeData.dark(useMaterial3: true).copyWith(
         textTheme: ThemeData.dark().textTheme.apply(fontFamily: 'SilpoText'),
       ),
-      home: const HomePage(),
+      routerConfig: appRouter,
     );
   }
 }
@@ -59,40 +59,15 @@ class _HomePageState extends State<HomePage> {
               final hw = _homeworks[index];
               return NavButton(
                 label: '${hw.number}. ${hw.title}',
-                onPressed: () => _navigateToHomework(context, hw.number),
+                onPressed: () => context.goNamed(
+                  RouteNames.homework,
+                  pathParameters: {'number': '${hw.number}'},
+                ),
               );
             }),
           ],
         ),
       ),
-    );
-  }
-
-  void _navigateToHomework(BuildContext context, int number) {
-    final screen = switch (number) {
-      11 => Homework11Screen(),
-      12 => Homework12Screen(),
-      13 => Homework13Screen(),
-      _ => Scaffold(
-        appBar: AppBar(
-          title: Text('Заняття $number'),
-          backgroundColor: Colors.blueGrey,
-        ),
-        body: Center(
-          child: Text(
-            'Незабаром',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 26,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ),
-    };
-    Navigator.push(
-      context,
-      MaterialPageRoute<void>(builder: (context) => screen),
     );
   }
 }

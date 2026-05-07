@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:rd_first_project/lesson_11/hw_11_task_1_screen.dart';
-import 'package:rd_first_project/lesson_11/hw_11_task_2_screen.dart';
-import 'package:rd_first_project/lesson_11/hw_11_task_3_screen.dart';
-import 'package:rd_first_project/lesson_11/hw_11_task_4_screen.dart';
-import 'package:rd_first_project/lesson_11/hw_11_task_5_screen.dart';
+import 'package:go_router/go_router.dart';
 import 'package:rd_first_project/main/entity/task_entity.dart';
 import 'package:rd_first_project/main/widget/nav_button.dart';
 import 'package:rd_first_project/main/widget/section_header.dart';
+import 'package:rd_first_project/router/route_names.dart';
 
 final _tasks = [
   TaskEntity(number: 1, title: 'Базовий контейнер'),
@@ -36,22 +33,16 @@ class Homework11Screen extends StatelessWidget {
             ),
             ...List.generate(_tasks.length, (index) {
               final task = _tasks[index];
+
               return NavButton(
                 label: '${task.number}. ${task.title}',
-                onPressed: () {
-                  final screen = switch (task.number) {
-                    1 => Hw11Task1Screen(),
-                    2 => Hw11Task2Screen(),
-                    3 => Hw11Task3Screen(),
-                    4 => Hw11Task4Screen(),
-                    5 => Hw11Task5Screen(),
-                    _ => throw UnimplementedError(),
-                  };
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute<void>(builder: (context) => screen),
-                  );
-                },
+                onPressed: () => context.goNamed(
+                  RouteNames.task,
+                  pathParameters: {
+                    'number': '11',
+                    'taskNumber': '${task.number}',
+                  },
+                ),
               );
             }),
           ],
