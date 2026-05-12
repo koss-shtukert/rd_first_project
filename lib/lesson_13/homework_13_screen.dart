@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:rd_first_project/lesson_13/hw_13_tasks_screen.dart';
+import 'package:go_router/go_router.dart';
 import 'package:rd_first_project/main/entity/task_entity.dart';
 import 'package:rd_first_project/main/widget/nav_button.dart';
 import 'package:rd_first_project/main/widget/section_header.dart';
+import 'package:rd_first_project/router/route_names.dart';
 
 final _tasks = [TaskEntity(number: 1, title: 'Task 1')];
 
@@ -26,18 +27,16 @@ class Homework13Screen extends StatelessWidget {
             ),
             ...List.generate(_tasks.length, (index) {
               final task = _tasks[index];
+
               return NavButton(
                 label: '${task.number}. ${task.title}',
-                onPressed: () {
-                  final screen = switch (task.number) {
-                    1 => Hw13TasksScreen(),
-                    _ => throw UnimplementedError(),
-                  };
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute<void>(builder: (context) => screen),
-                  );
-                },
+                onPressed: () => context.goNamed(
+                  RouteNames.task,
+                  pathParameters: {
+                    'number': '13',
+                    'taskNumber': '${task.number}',
+                  },
+                ),
               );
             }),
           ],
