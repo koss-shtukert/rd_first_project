@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rd_first_project/lesson_18/homework_cubit/counter_cubit.dart';
 import 'package:rd_first_project/main/widget/nav_button.dart';
 
-class CounterBody extends StatelessWidget {
-  const CounterBody({
-    required this.count,
+class CounterBodyCubit extends StatelessWidget {
+  const CounterBodyCubit({
     required this.onIncrement,
     required this.onDecrement,
     super.key,
   });
 
-  final int count;
   final VoidCallback onIncrement;
   final VoidCallback onDecrement;
 
@@ -29,14 +29,17 @@ class CounterBody extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 24),
-          Text(
-            '$count',
-            style: TextStyle(
-              color: Colors.yellow,
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
-            ),
-            textAlign: TextAlign.center,
+          BlocBuilder<CounterCubit, int>(
+            builder: (context, count) =>
+                Text(
+                  '$count',
+                  style: TextStyle(
+                    color: Colors.yellow,
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
           ),
           const SizedBox(height: 24),
           Row(

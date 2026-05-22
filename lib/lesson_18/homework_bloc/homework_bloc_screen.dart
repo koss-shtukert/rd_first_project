@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rd_first_project/lesson_18/homework_bloc/counter_bloc.dart';
 import 'package:rd_first_project/lesson_18/homework_bloc/counter_event.dart';
-import 'package:rd_first_project/lesson_18/widget/counter_body.dart';
+import 'package:rd_first_project/lesson_18/widget/counter_body_bloc.dart';
 
 class HomeworkBlocScreen extends StatelessWidget {
   const HomeworkBlocScreen({super.key});
@@ -16,9 +16,8 @@ class HomeworkBlocScreen extends StatelessWidget {
           backgroundColor: Colors.blueGrey,
           title: Text('Bloc Example'),
         ),
-        body: BlocBuilder<CounterBloc, int>(
-          builder: (context, count) => CounterBody(
-            count: count,
+        body: Builder(
+          builder: (context) => CounterBodyBloc(
             onIncrement: () =>
                 context.read<CounterBloc>().add(CounterIncrement()),
             onDecrement: () =>
