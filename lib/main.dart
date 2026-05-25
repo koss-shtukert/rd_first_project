@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:rd_first_project/lesson_19/rating_bloc/rating_bloc.dart';
 import 'package:rd_first_project/main/entity/homework_entity.dart';
 import 'package:rd_first_project/main/widget/nav_button.dart';
 import 'package:rd_first_project/main/widget/section_header.dart';
@@ -28,12 +30,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'RD Flutter Проєкт',
-      theme: ThemeData.dark(useMaterial3: true).copyWith(
-        textTheme: ThemeData.dark().textTheme.apply(fontFamily: 'SilpoText'),
+    return BlocProvider(
+      create: (_) => RatingBloc(),
+      child: MaterialApp.router(
+        title: 'RD Flutter Проєкт',
+        theme: ThemeData.dark(useMaterial3: true).copyWith(
+          textTheme: ThemeData.dark().textTheme.apply(fontFamily: 'SilpoText'),
+        ),
+        routerConfig: appRouter,
       ),
-      routerConfig: appRouter,
     );
   }
 }
