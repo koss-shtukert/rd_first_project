@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:rd_first_project/lesson_19/rating_bloc/rating_bloc.dart';
 import 'package:rd_first_project/lesson_19/rating_bloc/rating_event.dart';
 import 'package:rd_first_project/lesson_19/rating_bloc/rating_state.dart';
 import 'package:rd_first_project/lesson_19/widgets/action_buttons.dart';
 import 'package:rd_first_project/lesson_19/widgets/animated_phone.dart';
 import 'package:rd_first_project/lesson_19/widgets/comment_field.dart';
+import 'package:rd_first_project/lesson_19/widgets/rating_success_snack_bar.dart';
 import 'package:rd_first_project/lesson_19/widgets/star_rating.dart';
 
 class Hw19Task1Screen extends StatefulWidget {
@@ -23,9 +23,11 @@ class _Hw19Task1ScreenState extends State<Hw19Task1Screen> {
   void initState() {
     super.initState();
     _bloc = context.read<RatingBloc>();
+
     if (_bloc.state.status != RatingStatus.success) {
       _bloc.add(RatingReset());
     }
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
     });
@@ -36,6 +38,7 @@ class _Hw19Task1ScreenState extends State<Hw19Task1Screen> {
     if (_bloc.state.status != RatingStatus.success) {
       _bloc.add(RatingReset());
     }
+
     super.dispose();
   }
 
@@ -56,63 +59,12 @@ class _RatingView extends StatelessWidget {
           curr.status == RatingStatus.success,
       listener: (context, state) {
         Navigator.of(context).pop();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            duration: const Duration(seconds: 3),
-            padding: EdgeInsets.zero,
-            content: Container(
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 37),
-              decoration: BoxDecoration(
-                color: const Color(0xFF41A6F4),
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Color(0x40827F7F),
-                    offset: Offset(0, 4),
-                    blurRadius: 4,
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Image.asset(
-                    'assets/icons/hw19/star_happy.png',
-                    width: 21,
-                    height: 20,
-                  ),
-                  const SizedBox(width: 12),
-                  Flexible(
-                    child: Text(
-                      'Оцінку надіслано успішно',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Image.asset(
-                    'assets/icons/hw19/star_happy.png',
-                    width: 21,
-                    height: 20,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const RatingSuccessSnackBar());
       },
       child: Theme(
-        data: Theme.of(
-          context,
-        ).copyWith(textTheme: GoogleFonts.montserratTextTheme()),
+        data: Theme.of(context),
         child: Scaffold(
           backgroundColor: const Color(0xFF9AD1EF),
           appBar: AppBar(

@@ -19,7 +19,6 @@ class _AnimatedPhoneState extends State<AnimatedPhone> {
   void initState() {
     super.initState();
     _currentRating = context.read<RatingBloc>().state.rating;
-    _displayedRating = 0;
 
     if (_currentRating > 0) {
       _animateToRating(_currentRating);
@@ -37,9 +36,9 @@ class _AnimatedPhoneState extends State<AnimatedPhone> {
 
       if (!mounted) return;
 
-      _displayedRating += step;
-
-      (context as Element).markNeedsBuild();
+      setState(() {
+        _displayedRating += step;
+      });
     }
 
     _animating = false;
