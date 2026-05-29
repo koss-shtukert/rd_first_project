@@ -33,7 +33,6 @@ class _Hw21Task1ViewState extends State<_Hw21Task1View>
     with TickerProviderStateMixin {
   late Ticker _ticker;
   Duration _lastTick = Duration.zero;
-  bool _initialized = false;
 
   late AnimationController _controlsController;
   late Animation<double> _controlsOpacity;
@@ -51,11 +50,19 @@ class _Hw21Task1ViewState extends State<_Hw21Task1View>
     _controlsOpacity = Tween<double>(begin: 1.0, end: 0.0).animate(
       CurvedAnimation(parent: _controlsController, curve: Curves.easeOut),
     );
-    _controlsSlide = Tween<Offset>(
-      begin: Offset.zero,
-      end: const Offset(0, 0.3),
-    ).animate(
-      CurvedAnimation(parent: _controlsController, curve: Curves.easeOut),
+    _controlsSlide =
+        Tween<Offset>(begin: Offset.zero, end: const Offset(0, 0.3)).animate(
+          CurvedAnimation(parent: _controlsController, curve: Curves.easeOut),
+        );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final size = MediaQuery.sizeOf(context);
+
+    context.read<BallBloc>().add(
+      BallInitEvent(screenWidth: size.width, screenHeight: size.height),
     );
   }
 
@@ -97,14 +104,7 @@ class _Hw21Task1ViewState extends State<_Hw21Task1View>
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    if (!_initialized) {
-      context.read<BallBloc>().add(
-        BallInitEvent(screenWidth: size.width, screenHeight: size.height),
-      );
-      _initialized = true;
-    }
-
+    final size = MediaQuery.sizeOf(context);
     final grassTop = size.height * 0.78;
 
     return Scaffold(
@@ -114,70 +114,91 @@ class _Hw21Task1ViewState extends State<_Hw21Task1View>
           _ticker.stop();
           _controlsController.reverse();
         },
-        child: BlocBuilder<BallBloc, BallState>(
-          builder: (context, state) {
-            return Stack(
-              children: [
-                const SkyWidget(),
-                GrassWidget(grassTop: grassTop),
-                BallShadowWidget(
+        child: Stack(
+          children: [
+            const SkyWidget(),
+            GrassWidget(grassTop: grassTop),
+            BlocBuilder<BallBloc, BallState>(
+              buildWhen: (prev, curr) =>
+                  prev.ballX != curr.ballX ||
+                  prev.ballY != curr.ballY ||
+                  prev.rotation != curr.rotation,
+              builder: (context, state) {
+                return BallShadowWidget(
                   ballX: state.ballX,
                   ballY: state.ballY,
                   groundY: state.groundY,
                   ceilingY: state.ceilingY,
                   grassTop: grassTop,
-                ),
-                BallWidget(
+                );
+              },
+            ),
+            BlocBuilder<BallBloc, BallState>(
+              buildWhen: (prev, curr) =>
+                  prev.ballX != curr.ballX ||
+                  prev.ballY != curr.ballY ||
+                  prev.rotation != curr.rotation ||
+                  prev.useScale != curr.useScale,
+              builder: (context, state) {
+                return BallWidget(
                   ballX: state.ballX,
                   ballY: state.ballY,
                   rotation: state.rotation,
                   useScale: state.useScale,
                   onTap: _onBallTap,
                   onPanEnd: _onPanEnd,
-                ),
-                Positioned(
-                  left: 16,
-                  right: 16,
-                  bottom: size.height * 0.02,
-                  child: AnimatedBuilder(
-                    animation: _controlsController,
-                    builder: (context, child) {
-                      return FractionalTranslation(
-                        translation: _controlsSlide.value,
-                        child: Opacity(
-                          opacity: _controlsOpacity.value,
-                          child: child,
-                        ),
-                      );
-                    },
-                    child: IgnorePointer(
+                );
+              },
+            ),
+            Positioned(
+              left: 16,
+              right: 16,
+              bottom: size.height * 0.02,
+              child: AnimatedBuilder(
+                animation: _controlsController,
+                builder: (context, child) {
+                  return FractionalTranslation(
+                    translation: _controlsSlide.value,
+                    child: Opacity(
+                      opacity: _controlsOpacity.value,
+                      child: child,
+                    ),
+                  );
+                },
+                child: BlocBuilder<BallBloc, BallState>(
+                  buildWhen: (prev, curr) =>
+                      prev.useScale != curr.useScale ||
+                      prev.power != curr.power ||
+                      prev.isMoving != curr.isMoving,
+                  builder: (context, state) {
+                    return IgnorePointer(
                       ignoring: state.isMoving,
                       child: BallControlsWidget(
                         useScale: state.useScale,
                         power: state.power,
-                        onModeChanged: (v) => context
-                            .read<BallBloc>()
-                            .add(BallToggleModeEvent(v)),
+                        onModeChanged: (v) => context.read<BallBloc>().add(
+                          BallToggleModeEvent(v),
+                        ),
                         onPowerChanged: state.useScale
-                            ? (v) => context
-                                .read<BallBloc>()
-                                .add(BallSetPowerEvent(v))
+                            ? (v) => context.read<BallBloc>().add(
+                                BallSetPowerEvent(v),
+                              )
                             : null,
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
-                Positioned(
-                  top: MediaQuery.of(context).padding.top + 8,
-                  left: 8,
-                  child: IconButton(
-                    icon: const Icon(Icons.arrow_back, color: Colors.white),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                ),
-              ],
-            );
-          },
+              ),
+            ),
+            Positioned(
+              top: MediaQuery.paddingOf(context).top + 8,
+              left: 8,
+              child: IconButton(
+                icon: const Icon(Icons.arrow_back, color: Colors.white),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ),
+          ],
         ),
       ),
     );
