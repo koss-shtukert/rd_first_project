@@ -9,6 +9,7 @@ import 'package:rd_first_project/lesson_13/hw_13_tasks_screen.dart';
 import 'package:rd_first_project/lesson_18/homework_bloc/homework_bloc_screen.dart';
 import 'package:rd_first_project/lesson_18/homework_cubit/homework_cubit_screen.dart';
 import 'package:rd_first_project/lesson_19/hw_19_task_1_screen.dart';
+import 'package:rd_first_project/lesson_21/hw_21_task_1_screen.dart';
 import 'package:rd_first_project/main/screen/coming_soon_screen.dart';
 
 class TaskEntity {
@@ -29,6 +30,7 @@ class TaskEntity {
         (18, 1) => const HomeworkCubitScreen(),
         (18, 2) => const HomeworkBlocScreen(),
         (19, 1) => const Hw19Task1Screen(),
+        (21, 1) => const Hw21Task1Screen(),
         _ => ComingSoonScreen(number: lesson),
       };
 }

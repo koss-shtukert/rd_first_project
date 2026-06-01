@@ -62,6 +62,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/icons/hw19/
+    - assets/icons/hw21/
 
   fonts:
     - family: SilpoText
