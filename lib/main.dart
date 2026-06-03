@@ -19,6 +19,7 @@ const _homeworks = [
     title: 'BloC. Поєднання віджетів та бізнес-логіки',
   ),
   HomeworkEntity(number: 21, title: 'Explicit Animations'),
+  HomeworkEntity(number: 22, title: 'Обробка помилок та логування'),
   HomeworkEntity(number: 25, title: 'REST API'),
 ];
 
