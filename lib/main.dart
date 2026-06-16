@@ -20,7 +20,7 @@ const _homeworks = [
   ),
   HomeworkEntity(number: 21, title: 'Explicit Animations'),
   HomeworkEntity(number: 22, title: 'Обробка помилок та логування'),
-  HomeworkEntity(number: 25, title: 'REST API'),
+  HomeworkEntity(number: 25, title: 'Робота з REST API, JSON'),
 ];
 
 void main() {
