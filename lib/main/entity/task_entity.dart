@@ -11,6 +11,7 @@ import 'package:rd_first_project/lesson_18/homework_cubit/homework_cubit_screen.
 import 'package:rd_first_project/lesson_19/hw_19_task_1_screen.dart';
 import 'package:rd_first_project/lesson_21/hw_21_task_1_screen.dart';
 import 'package:rd_first_project/lesson_22/presentation/ui/screens/user_profile_homework_screen.dart';
+import 'package:rd_first_project/lesson_25/presentation/silpo_cheque_screen.dart';
 import 'package:rd_first_project/main/screen/coming_soon_screen.dart';
 
 class TaskEntity {
@@ -33,6 +34,7 @@ class TaskEntity {
         (19, 1) => const Hw19Task1Screen(),
         (21, 1) => const Hw21Task1Screen(),
         (22, 1) => const UserProfileHomeworkScreen(),
+        (25, 1) => const SilpoChequeScreen(),
         _ => ComingSoonScreen(number: lesson),
       };
 }
